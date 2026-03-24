@@ -11,7 +11,7 @@ Personal portfolio site for **Aarij Tanveer**, Senior People Operations & HR Sys
 ### Option A — Personal site (recommended)
 Use this if you want the URL to be `https://aarij-tanveer.github.io`
 
-1. Create a new GitHub repo named exactly: **`aarij-tanveer.github.io`**
+1. Create a new GitHub repo named exactly: **`aarijtanveer.github.io`**
 2. Upload `index.html` and `.gitignore` to the repo root
 3. Go to **Settings → Pages**
 4. Under *Source*, select **Deploy from a branch**
