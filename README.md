@@ -1,52 +1,20 @@
-# Aarij Tanveer — HR Systems Architect Portfolio
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-Personal portfolio site for **Aarij Tanveer**, Senior People Operations & HR Systems Leader. Features 15 interactive AI Strategy Lab dashboards.
+# Run and deploy your AI Studio app
 
-🌐 **Live site:** [aarijtanveer.github.io](https://aarijtanveer.github.io) *(update this link once deployed)*
+This contains everything you need to run your app locally.
 
----
+View your app in AI Studio: https://ai.studio/apps/87798f87-fcf8-4a75-b218-a572e9a93f4e
 
-## 🚀 Deploying to GitHub Pages
+## Run Locally
 
-### Option A — Personal site (recommended)
-Use this if you want the URL to be `https://aarij-tanveer.github.io`
+**Prerequisites:**  Node.js
 
-1. Create a new GitHub repo named exactly: **`aarijtanveer.github.io`**
-2. Upload `index.html` and `.gitignore` to the repo root
-3. Go to **Settings → Pages**
-4. Under *Source*, select **Deploy from a branch**
-5. Choose branch `main`, folder `/ (root)` → click **Save**
-6. Your site will be live at `https://aarij-tanveer.github.io` within ~1 minute
 
-### Option B — Project site
-Use this if you want the URL to be `https://aarij-tanveer.github.io/portfolio`
-
-1. Create a new GitHub repo with any name, e.g. **`portfolio`**
-2. Upload `index.html` and `.gitignore` to the repo root
-3. Go to **Settings → Pages**
-4. Under *Source*, select **Deploy from a branch**
-5. Choose branch `main`, folder `/ (root)` → click **Save**
-6. Your site will be live at `https://aarij-tanveer.github.io/portfolio`
-
----
-
-## 📁 Structure
-
-```
-/
-└── index.html      # Entire portfolio — self-contained, no build step needed
-```
-
-All dependencies (Tailwind CSS, Chart.js, Lucide icons, Google Fonts) are loaded from public CDNs — no `npm install` required.
-
----
-
-## ✏️ Making Updates
-
-Edit `index.html` directly. Push changes to `main` and GitHub Pages will redeploy automatically within ~30 seconds.
-
----
-
-## 📄 License
-
-© Aarij Tanveer. All rights reserved.
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
