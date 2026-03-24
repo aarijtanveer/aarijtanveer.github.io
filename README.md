@@ -2,7 +2,7 @@
 
 Personal portfolio site for **Aarij Tanveer**, Senior People Operations & HR Systems Leader. Features 15 interactive AI Strategy Lab dashboards.
 
-🌐 **Live site:** [aarij-tanveer.github.io](https://aarijtanveer.github.io) *(update this link once deployed)*
+🌐 **Live site:** [aarijtanveer.github.io](https://aarijtanveer.github.io) *(update this link once deployed)*
 
 ---
 
