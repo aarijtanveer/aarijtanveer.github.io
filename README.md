@@ -1,15 +1,15 @@
 # Aarij Tanveer — HR Systems Architect Portfolio
 
-Personal portfolio site for **Aarij Tanveer**, Senior People Operations & HR Systems Leader. Features 15 interactive AI Strategy Lab dashboards.
+Personal portfolio site for **Arij Tanveer**, Senior People Operations & HR Systems Leader. Features 15 interactive AI Strategy Lab dashboards.
 
-🌐 **Live site:** [aarij-tanveer.github.io](https://aarij-tanveer.github.io) *(update this link once deployed)*
+🌐 **Live site:** [aarijtanveer.github.io](https://aarijtanveer.github.io) *(update this link once deployed)*
 
 ---
 
 ## 🚀 Deploying to GitHub Pages
 
 ### Option A — Personal site (recommended)
-Use this if you want the URL to be `https://aarij-tanveer.github.io`
+Use this if you want the URL to be `https://aarijtanveer.github.io`
 
 1. Create a new GitHub repo named exactly: **`aarij-tanveer.github.io`**
 2. Upload `index.html` and `.gitignore` to the repo root
