@@ -48,7 +48,7 @@
     const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
     if (prog) prog.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
     const searching = !$('.cmdk').hidden;
-    if (!searching) bar.classList.toggle('away', y > 320 && y > lastY + 4 ? true : (y < lastY - 4 || y < 320) ? false : bar.classList.contains('away'));
+    bar.classList.toggle('scrolled', y > 8);
     lastY = y; ticking = false;
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
@@ -133,11 +133,15 @@
     });
     const mk = (key, label, n) => { const c = document.createElement('button'); c.type = 'button'; c.className = 'chipf'; c.dataset.f = key; c.innerHTML = `${label}<span>${n}</span>`; c.addEventListener('click', () => setFilter(key, true)); filt.appendChild(c); };
     mk('all', 'All', P.length); ORDER.forEach(k => mk(k, SHORT[k], P.filter(p => p.cat === k).length));
+    const LIMIT = 8; let expanded = false;
+    const moreBtn = document.createElement('div'); moreBtn.className = 'showall'; moreBtn.innerHTML = `<button class="btn btn-ghost" type="button">Show all ${P.length} projects</button><a class="more" href="services.html">Or see what I can build for you</a>`; grid.after(moreBtn);
+    $('button', moreBtn).addEventListener('click', () => { expanded = true; setFilter('all', false); cards.forEach((b, i) => { if (i >= LIMIT && !RM) { b.style.setProperty('--i', Math.min(i - LIMIT, 8)); b.classList.add('pop'); } }); });
     window.setFilter = (key, user) => {
       filter = CAT[key] ? key : 'all';
       $$('.chipf', filt).forEach(c => { c.setAttribute('aria-pressed', String(c.dataset.f === filter)); if (c.dataset.f === filter && filt.scrollWidth > filt.clientWidth) filt.scrollTo({ left: c.offsetLeft - filt.clientWidth / 2 + c.clientWidth / 2, behavior: user ? 'smooth' : 'auto' }); });
-      let vi = 0; cards.forEach(b => { b.hidden = !(filter === 'all' || b.dataset.cat === filter); b.classList.remove('pop'); if (!b.hidden && user) { b.style.setProperty('--i', Math.min(vi++, 8)); void b.offsetWidth; b.classList.add('pop'); } });
-      const n = visibleIds().length; count.textContent = filter === 'all' ? `All ${n} projects` : `${n} of ${P.length} projects: ${CAT[filter]}`;
+      let vi = 0, seen = 0; cards.forEach(b => { const inF = filter === 'all' || b.dataset.cat === filter; const cut = filter === 'all' && !expanded && seen >= LIMIT; if (inF) seen++; b.hidden = !inF || cut; b.classList.remove('pop'); if (!b.hidden && user) { b.style.setProperty('--i', Math.min(vi++, 8)); void b.offsetWidth; b.classList.add('pop'); } });
+      const n = visibleIds().length, folded = filter === 'all' && !expanded; count.textContent = folded ? `Highlights: ${LIMIT} of ${n} projects` : filter === 'all' ? `All ${n} projects` : `${n} of ${P.length} projects: ${CAT[filter]}`;
+      moreBtn.hidden = !folded;
       if (user) { history.replaceState(null, '', filter === 'all' ? '#work' : '#work=' + filter); const w = $('#work'); if (w.getBoundingClientRect().top < -10 || w.getBoundingClientRect().top > innerHeight * .5) w.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); }
     };
     var setFilter = window.setFilter;
@@ -191,8 +195,8 @@
     ORDER.forEach(k => L.push({ g: 'Go to', t: CAT[k], s: 'Filter the work', k: 'category filter', icon: I.grid, run: () => go('index.html#work=' + k) }));
     L.push({ g: 'Go to', t: 'BI lab', s: '15 industry dashboards', k: 'business intelligence demo analytics', icon: I.chart, run: () => go('lab.html') });
     (window.LAB_INDUSTRIES || []).forEach(n => L.push({ g: 'BI lab', t: n + ' dashboard', s: 'Open in the BI lab', k: 'industry kpi', icon: I.chart, run: () => go('lab.html#' + encodeURIComponent(n)) }));
-    L.push({ g: 'Go to', t: 'Services', s: 'Hire me for an independent project', k: 'freelance consulting hire work with me pricing', icon: I.brief, run: () => go('services.html') });
-    SERVICES.forEach(s => L.push({ g: 'Services', t: s.t, s: 'Service', k: s.k, icon: I.brief, run: () => go('services.html?s=' + s.id + '#brief') }));
+    L.push({ g: 'Go to', t: 'Let’s collaborate', s: 'Work with me on an independent project', k: 'freelance consulting hire work with me pricing', icon: I.brief, run: () => go('services.html') });
+    SERVICES.forEach(s => L.push({ g: 'Ways to collaborate', t: s.t, s: 'Ask about this', k: s.k, icon: I.brief, run: () => go('services.html?s=' + s.id + '#brief') }));
     L.push({ g: 'Go to', t: 'About', s: 'Background and tools', k: 'experience bio who', icon: I.user, run: () => go('index.html#about') });
     L.push({ g: 'Actions', t: 'Start a project', s: 'Write a short brief', k: 'hire contact quote brief', icon: I.page, run: () => go('services.html#brief') });
     L.push({ g: 'Actions', t: 'Book a call', s: '30 minutes', k: 'calendly meeting schedule', icon: I.cal, run: () => window.open(CONTACT.cal, '_blank', 'noopener') });
@@ -203,7 +207,7 @@
     return L;
   };
   const ck = $('.cmdk'), inp = $('input', ck), res = $('.res', ck); let all = [], shown = [], sel = 0, opener = null;
-  const DEFAULT = ['All work', 'BI lab', 'Services', 'Start a project', 'Book a call'];
+  const DEFAULT = ['All work', 'BI lab', 'Let’s collaborate', 'Start a project', 'Book a call'];
   const score = (it, q) => {
     const t = it.t.toLowerCase(), hay = (it.t + ' ' + it.s + ' ' + it.k + ' ' + it.g).toLowerCase(), ws = q.split(/\s+/).filter(Boolean);
     if (!ws.every(w => hay.includes(w))) return 0;
@@ -269,4 +273,15 @@
     $('[data-send=wa]', brief).addEventListener('click', () => { if (!ok()) return; window.open(`https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(compose())}`, '_blank', 'noopener'); });
   }
 
+
+  /* ---------- Floating "Hire me": appears once you are into the page, steps aside near other offers ---------- */
+  const hm = $('.hireme');
+  if (hm) {
+    let off = false; try { off = sessionStorage.getItem('at-hm') === '0'; } catch (e) {}
+    const blockers = $$('#hire, .cta6, .foot, .nudge');
+    const upd = () => { if (off) return hm.classList.remove('show'); const vh = innerHeight; const past = scrollY > vh * 1.2;
+      const near = blockers.some(b => { const r = b.getBoundingClientRect(); return r.top < vh && r.bottom > 0; }); hm.classList.toggle('show', past && !near); };
+    addEventListener('scroll', () => requestAnimationFrame(upd), { passive: true }); upd();
+    $('button', hm).addEventListener('click', () => { off = true; try { sessionStorage.setItem('at-hm', '0'); } catch (e) {} upd(); });
+  }
 })();

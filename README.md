@@ -4,7 +4,7 @@ Portfolio, about and services site for Muhammad Arij Tanveer. Plain HTML, CSS an
 
 - `index.html` the portfolio: hero showreel, the work gallery (filters and a project viewer), the BI lab teaser, about, and a call to action
 - `lab.html` the BI lab: fifteen industry dashboards (Month, Quarter, Year) on generated sample data
-- `services.html` the offer for independent projects: services, how it works, ways to work, FAQ and a brief that opens as an email or WhatsApp message
+- `services.html` "Let’s collaborate": the offer for independent projects: services, how it works, ways to work, FAQ and a brief that opens as an email or WhatsApp message
 
 Navigation: one bar on every page (a tab bar at the bottom on phones). Search everything with Ctrl K, Cmd K or `/`.
 Links you can share: `index.html#work=ai` opens a filtered gallery, `index.html#p=pf` opens one project, `lab.html#Cement` opens an industry, `services.html?s=dash#brief` pre-selects a service in the brief.
